@@ -1,0 +1,7 @@
+<div class="user-form-container">
+  <h2 class="form-title">
+    {{ mode === "edit" ? "Editar Usuario" : "Crear Usuario" }}
+  </h2>
+
+  <app-user-form (modeChanged)="onModeChanged($event)"></app-user-form>
+</div>
