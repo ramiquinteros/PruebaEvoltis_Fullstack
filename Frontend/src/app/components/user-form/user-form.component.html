@@ -1,5 +1,5 @@
 <ng-container *ngIf="createUser$ | async as formState">
-  <form novalidate [ngrxFormState]="formState" class="form-container">
+  <form novalidate (ngSubmit)="onSubmit()" [ngrxFormState]="formState" class="form-container">
     <div class="form-group">
       <label for="name">Nombre</label>
       <input
@@ -33,7 +33,6 @@
     <button
       type="submit"
       [disabled]="formState.isInvalid"
-      (click)="OnSubmit()"
       class="btn-submit"
     >
       Enviar

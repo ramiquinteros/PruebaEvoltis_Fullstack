@@ -13,7 +13,5 @@ namespace Application.Common.Interfaces.Repositories
         Task<UserEntity> FindOneAsync(int id);
 
         Task<List<UserEntity>> FindAsync();
-
-        Task<UserEntity> FindByEmail(string email);
     }
 }

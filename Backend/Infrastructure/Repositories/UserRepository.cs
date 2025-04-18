@@ -26,13 +26,6 @@ namespace Infrastructure.Repositories
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<UserEntity> FindByEmail(string email)
-        {
-            return await _context.Users
-                .Where(u => u.Email == email)
-                .FirstOrDefaultAsync();
-        }
-
         public async Task<UserEntity> FindOneAsync(int id)
         {
             return await _context.Users.FindAsync(id);

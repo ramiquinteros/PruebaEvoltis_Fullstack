@@ -23,13 +23,6 @@ namespace Infrastructure.Services
 
         public async Task<bool> CreateUser(CreateUserDto userDto)
         {
-            var userExist = await _userRepository.FindByEmail(userDto.Email);
-
-            if (userExist != null) 
-            {
-                throw new BadRequestException($"El usuario con el mail {userDto.Email} ya existe");
-            }
-
             var newUser = _mapper.Map<UserEntity>(userDto);
 
             return await _userRepository.AddAsync(newUser);
@@ -39,7 +32,7 @@ namespace Infrastructure.Services
         {
             var user = await _userRepository.FindOneAsync(id);
 
-            if (user != null)
+            if (user == null)
             {
                 throw new NotFoundException("El usuario no existe");
             }
@@ -51,7 +44,7 @@ namespace Infrastructure.Services
         {
             var user = await _userRepository.FindOneAsync(id);
 
-            if (user != null)
+            if (user == null)
             {
                 throw new NotFoundException("El usuario no existe");
             }
@@ -70,16 +63,9 @@ namespace Infrastructure.Services
         {
             var existingUser = await _userRepository.FindOneAsync(userDto.Id);
 
-            if (existingUser != null)
+            if (existingUser == null)
             {
                 throw new NotFoundException("El usuario no existe");
-            }
-
-            var userExist = await _userRepository.FindByEmail(userDto.Email);
-
-            if (userExist != null)
-            {
-                throw new BadRequestException($"El usuario con el mail {userDto.Email} ya existe");
             }
 
             _mapper.Map(userDto, existingUser); 

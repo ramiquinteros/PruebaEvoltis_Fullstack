@@ -1,7 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import { UserState } from './user.state';
 import * as UserActions from './user.actions';
-import { createFormGroupState, onNgrxForms, SetValueAction } from 'ngrx-forms';
+import { createFormGroupState, onNgrxForms, updateGroup, validate } from 'ngrx-forms';
+import { required, minLength, email } from "ngrx-forms/validation";
 import { User } from '../models/user.model';
 
 export const FORM_ID = 'createUserForm';
@@ -11,6 +12,12 @@ const userFormState = createFormGroupState<User>(FORM_ID, {
   name: '',
   last_name: '',
   email: '',
+});
+
+export const userFormReducer = updateGroup<User>({
+  name: validate(required, minLength(3)),
+  last_name: validate(required, minLength(3)),
+  email: validate(required, email),
 });
 
 const initialState: UserState = {
@@ -26,7 +33,7 @@ export const userReducer = createReducer(
 
   onNgrxForms(),
 
-  on(UserActions.init, (state) => ({
+  on(UserActions.init, () => ({
     ...initialState,
     loading: false,
     error: null,

@@ -39,8 +39,6 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = this.route.snapshot.paramMap.get('id');
-    const mode = userId ? 'edit' : 'create';
-    this.modeChanged.emit(mode);
     
     if (userId) {
       this.store.dispatch(UserActions.loadUser({ id: +userId }));
@@ -51,9 +49,8 @@ export class UserFormComponent implements OnInit {
     });
   }
 
-  OnSubmit() {
+  onSubmit() {
     if (this.user.id) {
-      console.log(this.user);
       this.store.dispatch(UserActions.editUser({ user: this.user }));
     } else {
       this.store.dispatch(UserActions.createUser({ user: this.user }));

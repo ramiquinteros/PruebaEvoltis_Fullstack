@@ -25,16 +25,5 @@ services:
     depends_on:
       - mysql
 
-  webapi:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8081:80"
-    depends_on:
-      - mysql
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-
 volumes:
   mysql_data:

@@ -22,6 +22,7 @@ import { MessageService } from 'primeng/api';
 import { InputTextModule } from "primeng/inputtext";
 import { HomeComponent } from './pages/home/home.component';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,8 @@ import { UserManagementComponent } from './pages/user-management/user-management
     MessageModule,
     ToastModule,
     InputTextModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({
       user: userReducer
     }),
